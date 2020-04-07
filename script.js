@@ -6,8 +6,18 @@
     generateBtn.addEventListener("click", writePassword);
 //})
 
+var userInput = {};
 
-var passwordDisplay = document.getElementById("#password");
+/*obj["key"]="value"*/
+
+let finalArray = [];
+const lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+const upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+const numeric = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const specChar = ["~", "!", "@", "#", "$", "%", "^", "&", "*", "<", ">", "?", "_", "-", "+", "="];
+
+var passwordDisplay = document.getElementById("password");
+console.log(passwordDisplay);
 
 // Write password to the #password input
 
@@ -19,71 +29,54 @@ function writePassword() {
   else {
     prompt === false;
   }
+  userInput["length"]=pwLength;
+  userInput.length=pwLength;
   console.log(pwLength);
 
-  /*var isNumber
-  isnumber = checkNum(pwLength);
-  while (!isNumber) {
-    pwLength = prompt("Value must be a number between 8 and 128, try again");
-  }*/
-
-
-  let lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-  lowerCase = prompt("Do you wish to use lowercase characters (Y/N)?");
-  if (lowerCase === "Y") {
-    lowerCase = true;
+  
+  lowerCaseInput = confirm("Do you wish to use lowercase characters (Y/N)?");
+  if (lowerCaseInput) {
+    finalArray = finalArray.concat(lowerCase);
   }
-  else {
-    lowerCase = false;
-  }
-  console.log(lowerCase);
+  console.log(finalArray);
 
   
-  let upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-  upperCase = prompt("Do you wish to use uppercase characters (Y/N)?");
-  if (upperCase == "Y") {
-    upperCase = true;
+  upperCaseInput = confirm("Do you wish to use uppercase characters (Y/N)?");
+  if (upperCaseInput) {
+    finalArray = finalArray.concat(upperCase);
   }
-  else {
-    upperCase = false;
-  }
-  console.log(upperCase);
-
+  console.log(upperCaseInput);
   
-  let numeric = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  numeric = prompt("Do you wish to use numbers (Y/N)?");
-  if (numeric == "Y") {
-    numeric = true;
+  numericInput = confirm("Do you wish to use numbers (Y/N)?");
+  if (numericInput) {
+   finalArray = finalArray.concat(numeric);
   }
-  else {
-    numeric = false;
+  console.log(numericInput);
+
+  specCharInput = confirm("Do you wish to use special characters (Y/N)?");
+  if (specCharInput) {
+   finalArray = finalArray.concat(specChar);
   }
-  console.log(numeric);
+  console.log(specCharInput);
 
-  
-  var specChar = ["~", "!", "@", "#", "$", "%", "^", "&", "*", "<", ">", "?", "_", "-", "+", "="];
-  specChar = prompt("Do you wish to use special characters (Y/N)?");
-  if (specChar == "Y") {
-    specChar = true;
-  }
-  else {
-    specChar = false;
-  }
-  console.log(specChar);
-}
+ generateRandom(finalArray, pwLength);
 
-function passwordText(pwLength, lowerCase, upperCase, numeric, specChar) {
-      var pwArray = "";
-      for (var i = 0; i < pwLength.length; i++) {
-        pwArray += lowerCase[i]; upperCase[i]; numeric[i]; specChar[i];
-        pwArray[i] = Math.floor(Math.random() * pwLength.length);
-      }
-      return passwordText.textContent();
-}
-
-passwordText.textContent = passwordDisplay; 
-
-console.log(passwordDisplay);
+};
 
 
+
+function generateRandom(letters, length) {
+  console.log(length);
+  console.log(letters);
+  let password = "";
+  for (var i = 0; i < length; i++) {
+   var random = Math.floor(Math.random() * letters.length);
+   password = password + letters[random];
+  console.log(i);
+  };
+  document.getElementById("password").value = password;
+};
+
+
+console.log(generateRandom);
 
